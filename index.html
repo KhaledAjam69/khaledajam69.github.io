@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Khaled Ajam — Network Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0b1216;
+  --surface:#101a20;
+  --surface-2:#152229;
+  --line:#223038;
+  --text:#e8edea;
+  --muted:#87968f;
+  --muted-2:#5d6b66;
+  --signal:#7fd9a0;
+  --signal-dim:#3d5c4a;
+  --amber:#e0b568;
+  font-size:16px;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+html{scroll-padding-top:calc(70px + env(safe-area-inset-top,0px));scroll-behavior:smooth;}
+*{box-sizing:border-box;}
+body{
+  margin:0;
+  background:var(--ink);
+  color:var(--text);
+  font-family:'Inter',system-ui,sans-serif;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+img,svg{max-width:100%;}
+.wrap{max-width:920px;margin:0 auto;padding:0 24px;}
+h1,h2,h3{font-family:'Space Grotesk',system-ui,sans-serif;margin:0;letter-spacing:-0.01em;}
+a{color:var(--signal);text-decoration:none;}
+.mono{font-family:'IBM Plex Mono',monospace;}
+
+/* nav */
+nav{
+  position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;z-index:50;
+  background:rgba(11,18,22,.88);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+nav .row{display:flex;align-items:center;justify-content:space-between;height:60px;}
+nav .id{font-family:'Space Grotesk';font-weight:600;font-size:15px;color:var(--text);}
+nav .id span{color:var(--signal);}
+nav ul{display:flex;gap:22px;list-style:none;margin:0;padding:0;font-size:14px;}
+nav ul li a{color:var(--muted);transition:color .15s;}
+nav ul li a:hover{color:var(--text);}
+nav .menu-btn{display:none;background:none;border:1px solid var(--line);color:var(--text);border-radius:6px;padding:6px 10px;font-size:13px;}
+@media (max-width:680px){
+  nav ul{display:none;}
+  nav .menu-btn{display:block;}
+}
+
+/* hero */
+header.hero{padding:150px 0 90px;position:relative;overflow:hidden;}
+.circuit-bg{
+  position:absolute;inset:0;z-index:-1;
+  -webkit-mask-image:radial-gradient(ellipse 70% 55% at 50% 0%, black 0%, transparent 75%);
+  mask-image:radial-gradient(ellipse 70% 55% at 50% 0%, black 0%, transparent 75%);
+}
+.circuit-bg svg{width:100%;height:100%;display:block;}
+
+/* signal wave divider */
+.wave-divider{position:relative;height:56px;overflow:hidden;margin-top:20px;}
+.wave-divider svg{width:100%;height:100%;display:block;}
+.wave-divider .pulse{
+  animation:pulse-glow 2.6s ease-in-out infinite;
+  transform-origin:center;
+}
+@keyframes pulse-glow{
+  0%,100%{opacity:.35;r:3;}
+  50%{opacity:1;r:4.5;}
+}
+.eyebrow-row{display:flex;align-items:center;gap:10px;color:var(--muted-2);font-size:13px;margin-bottom:18px;}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--signal);box-shadow:0 0 8px var(--signal);}
+h1.title{font-size:clamp(34px,6.5vw,58px);font-weight:700;color:var(--text);max-width:14ch;line-height:1.05;}
+.role{color:var(--signal);font-size:clamp(16px,2.4vw,20px);font-weight:500;margin-top:14px;}
+.lede{color:var(--muted);max-width:52ch;margin-top:18px;font-size:16.5px;}
+.hero-actions{display:flex;gap:14px;margin-top:32px;flex-wrap:wrap;}
+.btn{
+  border:1px solid var(--signal-dim);color:var(--text);padding:11px 20px;border-radius:7px;
+  font-size:14.5px;font-weight:500;transition:border-color .15s,background .15s;
+}
+.btn.primary{background:var(--signal);color:#0b1610;border-color:var(--signal);}
+.btn.primary:hover{background:#96e3b3;}
+.btn.ghost:hover{border-color:var(--signal);}
+
+.terminal{
+  margin-top:52px;background:var(--surface);border:1px solid var(--line);border-radius:10px;
+  max-width:560px;overflow:hidden;
+}
+.terminal .bar{display:flex;gap:7px;padding:10px 14px;border-bottom:1px solid var(--line);}
+.terminal .bar span{width:9px;height:9px;border-radius:50%;background:#3a4750;}
+.terminal pre{
+  margin:0;padding:18px 20px 22px;font-family:'IBM Plex Mono',monospace;font-size:13px;
+  color:#a9c2b6;white-space:pre-wrap;line-height:1.75;
+}
+.terminal .k{color:var(--muted-2);}
+.terminal .v{color:var(--signal);}
+.terminal .amber{color:var(--amber);}
+
+/* sections */
+section{padding:70px 0;border-top:1px solid var(--line);}
+#about{border-top:none;padding-top:20px;}
+.section-head{display:flex;align-items:baseline;gap:14px;margin-bottom:38px;}
+.section-head .num{font-family:'IBM Plex Mono';color:var(--muted-2);font-size:13px;}
+.section-head h2{font-size:26px;color:var(--text);}
+
+/* summary */
+.summary p{color:var(--muted);font-size:16.5px;max-width:66ch;}
+.summary strong{color:var(--text);font-weight:600;}
+.stat-row{display:flex;gap:36px;margin-top:30px;flex-wrap:wrap;}
+.stat b{display:block;font-family:'Space Grotesk';font-size:26px;color:var(--text);}
+.stat span{color:var(--muted-2);font-size:13px;}
+
+/* experience */
+.job{display:grid;grid-template-columns:150px 1fr;gap:24px;padding:26px 0;border-bottom:1px solid var(--line);}
+.job:last-child{border-bottom:none;}
+.job .when{color:var(--muted-2);font-size:13px;font-family:'IBM Plex Mono';padding-top:3px;}
+.job h3{font-size:17px;color:var(--text);}
+.job .org{color:var(--signal);font-size:14px;margin-top:3px;}
+.job ul{margin:12px 0 0;padding-left:18px;color:var(--muted);font-size:15px;}
+.job li{margin-bottom:6px;}
+@media (max-width:640px){
+  .job{grid-template-columns:1fr;gap:6px;}
+}
+
+/* skills */
+.skill-groups{display:grid;grid-template-columns:repeat(2,1fr);gap:28px;}
+@media (max-width:640px){.skill-groups{grid-template-columns:1fr;}}
+.skill-group h4{font-size:14px;color:var(--muted-2);font-weight:500;margin-bottom:12px;letter-spacing:.02em;}
+.chips{display:flex;flex-wrap:wrap;gap:8px;}
+.chip{
+  font-family:'IBM Plex Mono';font-size:12.5px;color:#b7cfc3;background:var(--surface-2);
+  border:1px solid var(--line);padding:6px 11px;border-radius:5px;
+}
+
+/* projects */
+.projects{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+@media (max-width:640px){.projects{grid-template-columns:1fr;}}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:24px;}
+.card.featured{grid-column:1/-1;background:linear-gradient(160deg,var(--surface-2),var(--surface));border-color:var(--signal-dim);}
+.card .tag{font-family:'IBM Plex Mono';font-size:11.5px;color:var(--signal);margin-bottom:10px;display:inline-block;}
+.card h3{font-size:17px;color:var(--text);margin-bottom:8px;}
+.card p{color:var(--muted);font-size:14.5px;margin:0 0 12px;}
+.card .stack{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px;}
+.card .stack span{font-size:11.5px;color:var(--muted-2);font-family:'IBM Plex Mono';border:1px solid var(--line);padding:3px 8px;border-radius:4px;}
+
+/* education + certs */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:40px;}
+@media (max-width:640px){.two-col{grid-template-columns:1fr;gap:34px;}}
+.edu h3{font-size:17px;color:var(--text);}
+.edu .org{color:var(--muted);font-size:14.5px;margin-top:4px;}
+.edu .when{color:var(--muted-2);font-size:13px;font-family:'IBM Plex Mono';margin-top:2px;}
+.honors{margin-top:16px;color:var(--muted);font-size:14.5px;}
+.cert-list{list-style:none;margin:0;padding:0;color:var(--muted);font-size:14.5px;}
+.cert-list li{padding:10px 0;border-bottom:1px solid var(--line);}
+.cert-list li:last-child{border-bottom:none;}
+.cert-list b{color:var(--text);font-weight:500;display:block;font-size:14.5px;}
+
+/* footer / contact */
+footer{padding:70px 0 calc(60px + env(safe-area-inset-bottom,0px));}
+footer h2{font-size:28px;color:var(--text);max-width:16ch;}
+footer p.lede{color:var(--muted);margin-top:14px;max-width:46ch;}
+.contact-row{display:flex;gap:16px;margin-top:30px;flex-wrap:wrap;}
+.contact-row a.btn{display:inline-block;}
+.foot-meta{margin-top:60px;color:var(--muted-2);font-size:13px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;border-top:1px solid var(--line);padding-top:22px;}
+
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto;}
+  .type-cursor{animation:none !important;}
+  .wave-divider .pulse{animation:none !important;}
+}
+.type-cursor{display:inline-block;width:7px;height:14px;background:var(--signal);margin-left:2px;animation:blink 1s steps(1) infinite;vertical-align:-2px;}
+@keyframes blink{50%{opacity:0;}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap row">
+    <div class="id">khaled<span>@</span>ajam</div>
+    <ul>
+      <li><a href="#work">Experience</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="menu-btn" onclick="document.getElementById('mobile-nav').classList.toggle('open')">Menu</button>
+  </div>
+</nav>
+
+<div id="mobile-nav" style="display:none;position:fixed;top:60px;left:0;right:0;background:var(--surface);border-bottom:1px solid var(--line);z-index:49;padding:16px 24px;">
+  <div style="display:flex;flex-direction:column;gap:14px;font-size:15px;">
+    <a href="#work" onclick="document.getElementById('mobile-nav').style.display='none'">Experience</a>
+    <a href="#skills" onclick="document.getElementById('mobile-nav').style.display='none'">Skills</a>
+    <a href="#projects" onclick="document.getElementById('mobile-nav').style.display='none'">Projects</a>
+    <a href="#education" onclick="document.getElementById('mobile-nav').style.display='none'">Education</a>
+    <a href="#contact" onclick="document.getElementById('mobile-nav').style.display='none'">Contact</a>
+  </div>
+</div>
+<script>
+document.querySelector('.menu-btn').addEventListener('click',()=>{
+  const m=document.getElementById('mobile-nav');
+  m.style.display = (m.style.display==='none'||!m.style.display) ? 'block':'none';
+});
+</script>
+
+<header class="hero">
+  <div class="circuit-bg" aria-hidden="true">
+    <svg preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="circuit" width="140" height="140" patternUnits="userSpaceOnUse">
+          <path d="M0 42 H52 V94 H140" fill="none" stroke="#223038" stroke-width="1.4"/>
+          <path d="M22 0 V22 H104 V72" fill="none" stroke="#223038" stroke-width="1.4"/>
+          <path d="M140 112 H86 V140" fill="none" stroke="#223038" stroke-width="1.4"/>
+          <path d="M0 42 V0" fill="none" stroke="#223038" stroke-width="1.4"/>
+          <circle cx="52" cy="42" r="3" fill="#3d5c4a"/>
+          <circle cx="104" cy="72" r="3" fill="#3d5c4a"/>
+          <circle cx="86" cy="112" r="3" fill="#7fd9a0" opacity=".55"/>
+          <circle cx="22" cy="22" r="2.4" fill="#3d5c4a"/>
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#circuit)"/>
+    </svg>
+  </div>
+  <div class="wrap">
+    <div class="eyebrow-row"><span class="dot"></span> Beirut, Lebanon · Available for freelance &amp; full-time roles</div>
+    <h1 class="title">Khaled Ajam</h1>
+    <div class="role">Network Engineer &amp; Systems / IT Support Specialist</div>
+    <p class="lede">Triple CCNA-certified, with 3+ years deploying and troubleshooting networks in the field — Cisco, MikroTik, Ubiquiti, fiber — plus IT support, systems administration, and a published IEEE paper on Wi-Fi sensing.</p>
+    <div class="hero-actions">
+      <a class="btn primary" href="#contact">Get in touch</a>
+      <a class="btn ghost" href="#work">See experience</a>
+    </div>
+
+    <div class="terminal">
+      <div class="bar"><span></span><span></span><span></span></div>
+      <pre class="mono" id="term"></pre>
+    </div>
+  </div>
+
+  <div class="wave-divider" aria-hidden="true">
+    <svg viewBox="0 0 1200 56" preserveAspectRatio="none">
+      <path d="M0 30 C60 8,120 52,180 30 C240 8,300 52,360 30 C420 8,480 52,540 30 C600 8,660 52,720 30 C780 8,840 52,900 30 C960 8,1020 52,1080 30 C1110 19,1140 41,1200 30"
+            fill="none" stroke="#7fd9a0" stroke-width="1.6" opacity=".55"/>
+      <path d="M0 34 C60 50,120 18,180 34 C240 50,300 18,360 34 C420 50,480 18,540 34 C600 50,660 18,720 34 C780 50,840 18,900 34 C960 50,1020 18,1080 34 C1110 42,1140 26,1200 34"
+            fill="none" stroke="#3d5c4a" stroke-width="1.4" opacity=".5"/>
+      <circle class="pulse" cx="180" cy="30" r="3" fill="#7fd9a0"/>
+      <circle class="pulse" cx="720" cy="30" r="3" fill="#7fd9a0" style="animation-delay:.9s"/>
+      <circle class="pulse" cx="1080" cy="30" r="3" fill="#7fd9a0" style="animation-delay:1.7s"/>
+    </svg>
+  </div>
+</header>
+
+<section id="about">
+  <div class="wrap summary">
+    <div class="section-head"><span class="num">01</span><h2>Summary</h2></div>
+    <p>I work across two layers most people treat as separate — the wires, radios, and routers that carry a signal, and the desks and dashboards where people actually use it. <strong>Three-plus years</strong> in, that's given me a field engineer's instinct for what breaks and a support technician's patience for explaining why. I've spliced fiber and aligned PtP links for a 200+ subscriber ISP, kept a university's Tier 1/2 tickets moving, and built <strong>Swyft.io</strong>, a freelance IT practice with 40+ clients. In between, I co-authored and presented occupancy-sensing research at <strong>IEEE WF-IoT 2026</strong>.</p>
+    <div class="stat-row">
+      <div class="stat"><b>3+ yrs</b><span>IT & networking experience</span></div>
+      <div class="stat"><b>×3</b><span>CCNA certifications</span></div>
+      <div class="stat"><b>200+</b><span>subscriber endpoints managed</span></div>
+      <div class="stat"><b>40+</b><span>freelance clients served</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="wrap">
+    <div class="section-head"><span class="num">02</span><h2>Experience</h2></div>
+
+    <div class="job">
+      <div class="when">07/2025 – 12/2025</div>
+      <div>
+        <h3>Outdoor Network Engineer</h3>
+        <div class="org">SARL NETPRO — Bednayel, Lebanon</div>
+        <ul>
+          <li>Configured and maintained MikroTik routers and switches across a network serving 200+ subscriber endpoints — IP addressing, bandwidth allocation, firewall/NAT.</li>
+          <li>Installed and aligned Ubiquiti PtP backhaul links, PtMP sector base stations, and CPE radios.</li>
+          <li>Triaged Layer 1–3 faults and RF interference; assisted with fiber splicing, routing, and optical power testing.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="job">
+      <div class="when">06/2024 – Present</div>
+      <div>
+        <h3>IT Support Technician</h3>
+        <div class="org">Milligro Store — Baalbek, Lebanon</div>
+        <ul>
+          <li>Maintain and repair POS terminals, barcode scanners, and peripheral hardware to eliminate downtime.</li>
+          <li>Administer Windows-based remote servers via RDP — updates, maintenance, fault resolution.</li>
+          <li>Troubleshoot local network infrastructure, including Ethernet-connected digital scales and managed switches.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="job">
+      <div class="when">02/2023 – 07/2026</div>
+      <div>
+        <h3>IT Support Technician</h3>
+        <div class="org">American University of Science and Technology — Zahle, Lebanon</div>
+        <ul>
+          <li>Delivered Tier 1/2 support, resolving 100+ tickets a month for faculty, staff, and students.</li>
+          <li>Troubleshot Ethernet cabling, switch port patching, DHCP/static IP, DNS, and campus Wi-Fi.</li>
+          <li>Automated diagnostics with CMD/PowerShell; imaged and deployed Windows systems.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="job">
+      <div class="when">02/2025 – Present</div>
+      <div>
+        <h3>Freelance IT Technician</h3>
+        <div class="org">Swyft.io (Self-Employed) — Baalbek, Lebanon</div>
+        <ul>
+          <li>Built a 40+ client base through referrals — PC builds, component sourcing, hardware repair.</li>
+          <li>Provided remote and on-site support: OS installs, software deployment, troubleshooting.</li>
+          <li>Configured and tuned gaming systems to client performance specs.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="job">
+      <div class="when">04/2025 – Present</div>
+      <div>
+        <h3>Python Programming Tutor</h3>
+        <div class="org">Self-Employed — Remote</div>
+        <ul>
+          <li>Delivered one-on-one Python instruction — modular scripting, algorithmic logic, OOP — to international students.</li>
+          <li>Ran live code reviews and guided debugging toward working console apps and automation scripts.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="section-head"><span class="num">03</span><h2>Skills</h2></div>
+    <div class="skill-groups">
+      <div class="skill-group">
+        <h4>Networking &amp; Infrastructure</h4>
+        <div class="chips">
+          <span class="chip">Cisco IOS</span><span class="chip">MikroTik RouterOS</span><span class="chip">WinBox</span>
+          <span class="chip">Ubiquiti PtP/PtMP</span><span class="chip">TCP/IP · VLSM</span><span class="chip">Firewall & NAT</span>
+          <span class="chip">Fiber Splicing</span><span class="chip">OSPF</span><span class="chip">VLANs</span><span class="chip">STP</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4>Systems &amp; IT Support</h4>
+        <div class="chips">
+          <span class="chip">Tier 1/2 Support</span><span class="chip">Active Directory</span><span class="chip">Windows Admin</span>
+          <span class="chip">Linux Admin</span><span class="chip">VMware</span><span class="chip">Hyper-V</span>
+          <span class="chip">Hardware Diagnostics</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4>Programming &amp; Scripting</h4>
+        <div class="chips">
+          <span class="chip">Python</span><span class="chip">C++</span><span class="chip">PowerShell</span>
+          <span class="chip">MATLAB</span><span class="chip">SQL</span><span class="chip">XML / XSLT</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4>Data &amp; Analytics</h4>
+        <div class="chips">
+          <span class="chip">Power BI</span><span class="chip">Excel — Pivot / VLOOKUP</span><span class="chip">Data Modeling</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="section-head"><span class="num">04</span><h2>Projects</h2></div>
+    <div class="projects">
+      <div class="card featured">
+        <span class="tag">Published — IEEE WF-IoT 2026</span>
+        <h3>WI-VENT: Wi-Fi RSSI Occupancy Detection System</h3>
+        <p>A device-free occupancy detection system that reads fluctuations in 2.4 GHz Wi-Fi RSSI to automate HVAC ventilation — no cameras or motion sensors required. Engineered on ESP32, published and presented at the IEEE World Forum on Internet of Things.</p>
+        <div class="stack"><span>ESP32</span><span>C++</span><span>RF Sensing</span></div>
+      </div>
+      <div class="card">
+        <span class="tag">Signal Processing</span>
+        <h3>PCM/DPCM Digital Communication System</h3>
+        <p>A MATLAB client-server app transmitting voice, images, and text between two laptops over local TCP/IP sockets, with PCM/DPCM encoding to compress and reconstruct multimedia with minimal noise.</p>
+        <div class="stack"><span>MATLAB</span><span>TCP/IP Sockets</span></div>
+      </div>
+      <div class="card">
+        <span class="tag">Network Design</span>
+        <h3>Three-Block Campus Network Architecture</h3>
+        <p>A hierarchical network connecting three campus blocks — VLAN segmentation, inter-VLAN routing, OSPF, and Spanning Tree for loop-free redundancy, with DHCP pools and ACLs securing inter-block traffic.</p>
+        <div class="stack"><span>Cisco IOS</span><span>OSPF</span><span>ACLs</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="wrap">
+    <div class="section-head"><span class="num">05</span><h2>Education &amp; Certifications</h2></div>
+    <div class="two-col">
+      <div class="edu">
+        <h3>B.Sc. Computer &amp; Communications Engineering</h3>
+        <div class="org">American University of Science and Technology, Zahle</div>
+        <div class="when">10/2022 – 07/2026</div>
+        <div class="honors">
+          Coursework: Electromagnetism, Computer Networks &amp; Infrastructure, Wireless Communications, Digital Communication Systems.<br><br>
+          Honors: Pre-Engineering Faculty Commendation; Galactic Problem Solver Award, NASA Space Apps Challenge.
+        </div>
+      </div>
+      <ul class="cert-list">
+        <li><b>Cisco Certified Network Associate</b>×3 certifications</li>
+        <li><b>Introduction to Cybersecurity</b>Cisco</li>
+        <li><b>NetQ Deployment and Installation</b></li>
+        <li><b>Google IT Support Professional Certificate</b>Google</li>
+        <li><b>ECPE Certified</b>University of Michigan — C2 Mastery</li>
+        <li><b>Raspberry Pi Training</b></li>
+        <li><b>Conflict Sensitivity Training</b></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="section-head"><span class="num">06</span></div>
+    <h2>Let's fix a network or build something new.</h2>
+    <p class="lede">Open to network engineering roles, IT support positions, and freelance infrastructure work.</p>
+    <div class="contact-row">
+      <a class="btn primary" href="mailto:khaledajam622005@gmail.com">khaledajam622005@gmail.com</a>
+      <a class="btn ghost" href="tel:+96181012474">+961 81 012 474</a>
+      <a class="btn ghost" href="https://linkedin.com/in/khaledismailajam">LinkedIn</a>
+      <a class="btn ghost" href="https://github.com/KhaledAjam69">GitHub</a>
+    </div>
+    <div class="foot-meta">
+      <span>Khaled Ajam — Beirut, Lebanon</span>
+      <span>Fluent in Arabic &amp; English</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+const lines = [
+  {k:"$ whoami",v:""},
+  {k:"",v:"khaled_ajam — network engineer"},
+  {k:"$ cat cert.log",v:""},
+  {k:"",v:"CCNA x3 :: verified"},
+  {k:"$ traceroute experience",v:""},
+  {k:"",v:"netpro -> aust -> milligro -> swyft.io"},
+  {k:"$ status",v:""},
+  {k:"",v:"", amber:"open_to_work: true"}
+];
+const el = document.getElementById('term');
+let out = "";
+let li = 0, ci = 0;
+
+function typeNext(){
+  if(li >= lines.length){
+    out += '<span class="type-cursor"></span>';
+    el.innerHTML = out;
+    return;
+  }
+  const line = lines[li];
+  const full = line.k ? line.k : (line.amber ? line.amber : line.v);
+  const cls = line.amber ? 'amber' : (line.k ? 'k' : 'v');
+  if(ci === 0 && line.k && line.v === "" && !line.amber){
+    // command line, type it
+  }
+  if(ci <= full.length){
+    let preview = out + '<span class="'+cls+'">' + full.slice(0,ci) + '</span><span class="type-cursor"></span>';
+    el.innerHTML = preview;
+    ci++;
+    setTimeout(typeNext, line.k ? 28 : 10);
+  } else {
+    out += '<span class="'+cls+'">' + full + '</span>\n';
+    li++; ci = 0;
+    setTimeout(typeNext, 180);
+  }
+}
+if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+  el.innerHTML = lines.map(l=>{
+    const t = l.k || l.amber || l.v;
+    const cls = l.amber ? 'amber' : (l.k ? 'k':'v');
+    return '<span class="'+cls+'">'+t+'</span>';
+  }).join('\n');
+} else {
+  typeNext();
+}
+</script>
+
+</body>
+</html>
